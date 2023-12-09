@@ -17,7 +17,7 @@ router.get(
             // Requesting the user's profile and email
             scope: ['profile', 'email'],
             // Optionally force pick account every time
-            // prompt: "select_account"
+            prompt: 'select_account',
         }
     )
 );

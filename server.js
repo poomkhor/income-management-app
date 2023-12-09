@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 const passport = require('passport');
 var methodOverride = require('method-override');
 
@@ -25,6 +26,15 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+const sessionStore = new MongoDBStore({
+    uri: process.env.DATABASE_URL,
+    collection: 'sessions',
+});
+
+sessionStore.on('error', function (error) {
+    console.log(error);
+});
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -37,6 +47,7 @@ app.use(
         secret: process.env.SECRET,
         resave: false,
         saveUninitialized: true,
+        store: sessionStore,
     })
 );
 
