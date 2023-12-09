@@ -16,20 +16,12 @@ function newExpense(req, res) {
 async function create(req, res) {
     // add user to the body to create expense document
 
-    req.body.user = req.user._id;
-    req.body.userName = req.user.name;
-    req.body.userEmail = req.user.name;
-    req.body.userAvatar = req.user.avatar;
-
-    const user = req.body.user;
-    const userName = req.body.userName;
-    const userEmail = req.body.userEmail;
-    const userAvatar = req.body.userAvatar;
+    const user = req.user._id;
+    const userName = req.user.name;
+    const userEmail = req.user.name;
+    const userAvatar = req.user.avatar;
     // Remove empty properties so that defaults will be applied
-    for (let key in req.body) {
-        console.log(req.body);
-        if (req.body[key] === '') delete req.body[key];
-    }
+
     try {
         console.log(req.body);
         // create new expense document
@@ -43,6 +35,10 @@ async function create(req, res) {
             amount: amount,
             category: {
                 category: category,
+                user,
+                userName,
+                userEmail,
+                userAvatar,
             },
             user,
             userName,
@@ -50,7 +46,7 @@ async function create(req, res) {
             userAvatar,
         });
 
-        await Expense.create(expense);
+        await Expense.create(req.body);
         // Redirect to the new income's show functionality
         res.redirect('/app');
     } catch (err) {

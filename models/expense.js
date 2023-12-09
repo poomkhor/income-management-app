@@ -7,7 +7,7 @@ const categorySchema = new Schema(
         user: {
             type: Schema.Types.ObjectId,
             ref: 'User',
-            // required: true,
+            required: true,
         },
     },
     {
@@ -21,7 +21,7 @@ const expenseSchema = new Schema(
         user: {
             type: Schema.Types.ObjectId,
             ref: 'User',
-            required: true,
+            // required: true,
         },
         detail: {
             type: String,
