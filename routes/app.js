@@ -5,5 +5,7 @@ const appCtrl = require('../controllers/app.js');
 // Require the auth middleware
 const ensureLoggedIn = require('../config/ensureLoggedIn');
 
-// GET /app to display the app page
-router.get('/app', appCtrl);
+// GET /app to display the app page and ensure loggedin
+router.get('/app', ensureLoggedIn, appCtrl.index);
+
+module.exports = router;

@@ -9,11 +9,11 @@
 <body>
     <nav>
     <img src="/images/income.png">
-    <a href="/" <%- title === 'Home' ? 'class="active"' : '' %>>HOME</a>
     <% if (user) { %>
+      <a href="/app" <%- title === 'Home' ? 'class="active"' : '' %>>HOME</a>
       <a href="/income/new"	<%- title === 'Add Income' ? 'class="active"' : '' %>>
-      ADD INCOME</a>
-      <a href="/expense/new" <%- title === 'Add Expense' ? 'class="active"' : '' %>>ADD EXPENSE</a>
+      INCOME</a>
+      <a href="/expense/new" <%- title === 'Add Expense' ? 'class="active"' : '' %>>EXPENSE</a>
       <a href="/logout">LOG OUT</a>
     <% } else { %>
       <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>

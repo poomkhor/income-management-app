@@ -1,0 +1,15 @@
+<%- include('../partials/header') %>
+
+<form id="new-form" action="/income" method="POST">
+  <label>Date:</label>
+  <input type="date" name="date" required>
+  <label>Source:</label>
+  <input type="text" name="source" required>
+  <label>Amount:</label>
+  <input type="number" name="amount" required>
+  <label>Note:</label>
+  <input type="text" name="note">
+  <input type="submit" value="Add Income">
+</form>
+
+<%- include('../partials/footer') %>
