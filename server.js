@@ -52,7 +52,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/', appRouter);
 app.use('/', incomeRouter);
-// app.use('/', expenseRouter);
+app.use('/', expenseRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,15 +1,15 @@
 // import income model
-const Income = require('../models/income');
+const Expense = require('../models/expense');
 
 module.exports = {
-    new: newIncome,
+    new: newExpense,
     create,
     delete: deleteIncome,
 };
 
-function newIncome(req, res) {
+function newExpense(req, res) {
     // render create new income page
-    res.render('app/new-income.ejs', { title: 'Add Income' });
+    res.render('app/new-expense.ejs', { title: 'Add Expense' });
 }
 
 async function create(req, res) {
@@ -22,14 +22,14 @@ async function create(req, res) {
         if (req.body[key] === '') delete req.body[key];
     }
     try {
-        // Update this line because now we need the _id of the new income
-        const income = await Income.create(req.body);
+        // create new expense document
+        await Expense.create(req.body);
         // Redirect to the new income's show functionality
         res.redirect('/app');
     } catch (err) {
         // Typically some sort of validation error
         console.log(err);
-        res.render('app/new-income.ejs', {
+        res.render('app/new-expense.ejs', {
             title: 'Add Income',
             errorMsg: err.message,
         });
@@ -37,7 +37,7 @@ async function create(req, res) {
 }
 
 async function deleteIncome(req, res) {
-    const incomeId = req.params.id;
-    await Income.deleteOne({ _id: incomeId });
+    const expenseId = req.params.id;
+    await Expense.deleteOne({ _id: expenseId });
     res.redirect('/app');
 }

@@ -15,6 +15,7 @@ const incomeSchema = new Schema(
         },
         amount: {
             type: Number,
+            min: 0,
             required: true,
         },
         note: String,

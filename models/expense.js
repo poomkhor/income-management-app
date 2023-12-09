@@ -15,9 +15,10 @@ const expenseSchema = new Schema(
         },
         amount: {
             type: Number,
+            min: 0,
             required: true,
         },
-        categories: {
+        category: {
             type: String,
             required: true,
         },
