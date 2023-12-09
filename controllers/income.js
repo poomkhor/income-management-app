@@ -4,6 +4,7 @@ const Income = require('../models/income');
 module.exports = {
     new: newIncome,
     create,
+    delete: deleteIncome,
 };
 
 function newIncome(req, res) {
@@ -21,6 +22,15 @@ async function create(req, res) {
         if (req.body[key] === '') delete req.body[key];
     }
     try {
+        // format date string
+        const dt = req.body.date;
+        console.log(dt);
+        // const date = `${dt.getDate().toString().padStart(2, '0')}-${(
+        //     dt.getMonth() + 1
+        // )
+        //     .toString()
+        //     .padStart(2, '0')}-${dt.getFullYear()}`;
+        // req.body.date = date;
         // Update this line because now we need the _id of the new income
         const income = await Income.create(req.body);
         // Redirect to the new income's show functionality
@@ -33,4 +43,10 @@ async function create(req, res) {
             errorMsg: err.message,
         });
     }
+}
+
+async function deleteIncome(req, res) {
+    const incomeId = req.params.id;
+    await Income.deleteOne({ _id: incomeId });
+    res.redirect('/app');
 }

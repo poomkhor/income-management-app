@@ -14,13 +14,20 @@
         </tr>
     </thead>
     <tbody>
+        <% let total = 0 %>
         <%income.forEach((i) => {%>
+        <!-- get the total amount sum -->
+        <% total += i.amount %>
         <tr>
-            <td><%=i.date%></td>
+            <!-- formate Date Object -->
+            <% date= i.date.getDate().toString().padStart(2, '0') + '-' + (i.date.getMonth() + 1).toString().padStart(2, '0') + '-'+ i.date.getFullYear()%>
+            <td><%= date %></td>
             <td><%=i.source%></td>
-            <td><%=i.amount%></td>
+            <!-- convert the amount to currency THB -->
+            <td><%=i.amount.toLocaleString("en-US",{style:"currency", currency:"THB"})%></td>
             <td><%=i.note%></td>
             <td><% if (user?._id.equals(i.user)) { %>
+            <!-- delete action -->
               <form action="/income/<%= i._id %>?_method=DELETE" method="POST">
                 <button type="submit">X</button>
               </form>
@@ -28,6 +35,12 @@
           </td>
         </tr>
         <%});%>
+        <tr>
+        <!-- Total row in THB currency -->
+        <td colspan="1"></td>
+        <td><strong>Total Income</strong></td>
+        <td><strong><%= total.toLocaleString("en-US",{style:"currency", currency:"THB"}) %></strong></td>
+      </tr>
     </tbody>
 </table>
 </div>

@@ -11,4 +11,7 @@ router.get('/income/new', ensureLoggedIn, incomeCtrl.new);
 // POST income
 router.post('/income', ensureLoggedIn, incomeCtrl.create)
 
+// DELETE income
+router.delete('/income/:id', ensureLoggedIn, incomeCtrl.delete)
+
 module.exports = router;
