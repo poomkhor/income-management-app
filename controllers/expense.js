@@ -20,8 +20,12 @@ async function create(req, res) {
     const userName = req.user.name;
     const userEmail = req.user.name;
     const userAvatar = req.user.avatar;
-    // Remove empty properties so that defaults will be applied
 
+    // Remove empty properties so that defaults will be applied
+    for (let key in req.body) {
+        console.log(req.body);
+        if (req.body[key] === '') delete req.body[key];
+    }
     try {
         console.log(req.body);
         // create new expense document
@@ -36,9 +40,6 @@ async function create(req, res) {
             category: {
                 category: category,
                 user,
-                userName,
-                userEmail,
-                userAvatar,
             },
             user,
             userName,
@@ -46,7 +47,7 @@ async function create(req, res) {
             userAvatar,
         });
 
-        await Expense.create(req.body);
+        await Expense.create(expense);
         // Redirect to the new income's show functionality
         res.redirect('/app');
     } catch (err) {
