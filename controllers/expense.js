@@ -13,6 +13,7 @@ function newExpense(req, res) {
 }
 
 async function create(req, res) {
+    // add user to the body to create expense document
     req.body.user = req.user._id;
     req.body.userName = req.user.name;
     req.body.userEmail = req.user.name;
