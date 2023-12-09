@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-// import income controller
+// import expense controller
 const expenseCtrl = require('../controllers/expense.js');
+// import category controller
+const categoryCtrl = require('../controllers/category.js');
 // Require the auth middleware
 const ensureLoggedIn = require('../config/ensureLoggedIn');
 
@@ -13,5 +15,8 @@ router.post('/expense', ensureLoggedIn, expenseCtrl.create);
 
 // DELETE income
 router.delete('/expense/:id', ensureLoggedIn, expenseCtrl.delete);
+
+// GET /category/new to add category and ensure loggedin
+router.get('/category/new', ensureLoggedIn, categoryCtrl.new);
 
 module.exports = router;

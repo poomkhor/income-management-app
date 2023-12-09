@@ -7,6 +7,7 @@ function filterMonth() {
     if (selectElement.value !== 'all') {
         outputMonth = selectElement.value;
     }
+
     console.log(outputMonth);
 }
 </script>
@@ -103,6 +104,20 @@ function filterMonth() {
             <!-- convert the amount to currency THB -->
             <td><%=e.amount.toLocaleString("en-US",{style:"currency", currency:"THB"})%></td>
             <td><%=e.note%></td>
+
+            <% const filteredItems = expense.filter(e => {%>
+                <% console.log(outputMonth) %>
+                <% return e.date.toLocaleString('default', {month: 'short'} ) === outputMonth %>
+
+                <%}); %>
+
+<!-- Render filtered items -->
+            <% filteredItems.forEach(item => { %>
+            <tr>
+            <td>Date: <%= item.date %></td>
+            <td>Detail: <%= item.detail %></td>
+            </tr>
+            <% }); %>
 
             <td><% if (user?._id.equals(e.user)) { %>
             <!-- delete action -->

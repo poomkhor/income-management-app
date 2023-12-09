@@ -7,8 +7,10 @@ module.exports = { index };
 
 // displaying dashboard with income and expense
 async function index(req, res) {
+    // get value from filter
+    const monthFilter = req.body;
+    console.log(monthFilter);
     // get income and expense and sort by date
-
     const userId = req.user._id;
     const income = await Income.find({}).sort('date');
     // get months variable for filter
@@ -24,7 +26,7 @@ async function index(req, res) {
         }
     });
     const expense = await Expense.find({}).sort('date');
-    // get months from expense
+    // get months from expense to be used in filter option
     expense.forEach((e) => {
         if (
             !months.includes(

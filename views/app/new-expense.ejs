@@ -6,7 +6,18 @@
   <label>Detail:</label>
   <input type="text" name="detail" required>
   <label>Category:</label>
-  <input type="text" name="category" required>
+  <select name="category">
+    <option value='Food'>Food</option>
+    <option value='Clothing'>Clothing</option>
+    <option value='Mortgage'>Mortgage</option>
+    <option value='Rental'>Rental</option>
+    <option value='Car Lease'>Car Lease</option>
+    <option value='Miscellaneous'>Miscellaneous</option>
+  </select>
+  <!-- add New Category -->
+    <button><a href='/category/new'>ADD NEW CATEGORY</a></button>
+</br>
+  <!-- <input type="text" name="category" required> -->
   <label>Amount:</label>
   <input type="number" name="amount" required>
   <label>Note:</label>

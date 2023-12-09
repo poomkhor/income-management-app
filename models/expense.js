@@ -1,6 +1,20 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const categorySchema = new Schema(
+    {
+        category: { type: String, required: true },
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            // required: true,
+        },
+    },
+    {
+        timestamps: true,
+    }
+);
+
 const expenseSchema = new Schema(
     {
         date: { type: Date, required: true },
@@ -18,10 +32,7 @@ const expenseSchema = new Schema(
             min: 0,
             required: true,
         },
-        category: {
-            type: String,
-            required: true,
-        },
+        category: categorySchema,
         note: String,
     },
     {
