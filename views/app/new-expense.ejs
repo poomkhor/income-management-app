@@ -7,12 +7,14 @@
   <input type="text" name="detail" required>
   <label>Category:</label>
   <select name="category">
-    <option value='Food'>Food</option>
-    <option value='Clothing'>Clothing</option>
-    <option value='Mortgage'>Mortgage</option>
-    <option value='Rental'>Rental</option>
-    <option value='Car Lease'>Car Lease</option>
-    <option value='Miscellaneous'>Miscellaneous</option>
+    <option value='Food'>FOOD</option>
+    <option value='Clothing'>CLOTHING</option>
+    <option value='Mortgage'>MORTGAGE</option>
+    <option value='Rental'>RENTAL</option>
+    <option value='Car Lease'>CAR LEASE</option>
+    <option value='Miscellaneous'>MISCELLANEOUS</option>
+    <%- categories.map(c =>
+        `<option value="${c.category.toUpperCase()}">${c.category.toUpperCase()}</option>`).join('')%>
   </select>
   <!-- add New Category -->
     <button><a href='/category/new'>ADD NEW CATEGORY</a></button>

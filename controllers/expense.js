@@ -1,16 +1,18 @@
 // import expense model
-const Expense = require('../models/expense');
+const { Expense, Category } = require('../models/expense');
 const mongoose = require('mongoose');
 
 module.exports = {
     new: newExpense,
     create,
-    delete: deleteIncome,
+    delete: deleteExpense,
 };
 
-function newExpense(req, res) {
+async function newExpense(req, res) {
     // render create new income page
-    res.render('app/new-expense.ejs', { title: 'Add Expense' });
+    // need categories to render
+    const categories = await Category.find({});
+    res.render('app/new-expense.ejs', { title: 'Add Expense', categories });
 }
 
 async function create(req, res) {
@@ -18,16 +20,11 @@ async function create(req, res) {
 
     const user = req.user._id;
     const userName = req.user.name;
-    const userEmail = req.user.name;
+    const userEmail = req.user.email;
     const userAvatar = req.user.avatar;
 
-    // Remove empty properties so that defaults will be applied
-    for (let key in req.body) {
-        console.log(req.body);
-        if (req.body[key] === '') delete req.body[key];
-    }
     try {
-        console.log(req.body);
+        // console.log('before :' + req.body);
         // create new expense document
         const date = req.body.date;
         const detail = req.body.detail;
@@ -38,16 +35,12 @@ async function create(req, res) {
             detail: detail,
             amount: amount,
             category: {
-                category: category,
+                category,
                 user,
             },
             user,
-            userName,
-            userEmail,
-            userAvatar,
         });
-
-        await Expense.create(expense);
+        await expense.save();
         // Redirect to the new income's show functionality
         res.redirect('/app');
     } catch (err) {
@@ -60,7 +53,7 @@ async function create(req, res) {
     }
 }
 
-async function deleteIncome(req, res) {
+async function deleteExpense(req, res) {
     const expenseId = req.params.id;
     await Expense.deleteOne({ _id: expenseId });
     res.redirect('/app');

@@ -17,13 +17,16 @@ function filterMonth() {
 </br>
 <!-- filter month -->
 <div>
-    <select class='monthFilter'>
-        <option value='all'>ALL</option>
+    <form action="" method="GET">
+    <select class='filterMonth' name="filterMonth">
+        <option value='All'>ALL</option>
         <%- months.map(m =>
         `<option value="${m}">${m.toUpperCase()}</option>`).join('')%>
     </select>
+    <button type="submit" onclick="filterMonth()">Filter</button>
+    </form>
     <!-- add button to call the dom function onclick refer to js script in webApp.js-->
-    <button type="button" onclick="filterMonth()">Filter</button>
+
 </div>
 
 

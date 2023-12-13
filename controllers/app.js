@@ -1,19 +1,17 @@
 // import income and expense model
 const Income = require('../models/income');
-const Expense = require('../models/expense');
+const { Expense } = require('../models/expense');
 const User = require('../models/user');
+const category = require('./category');
 
 module.exports = { index };
 
 // displaying dashboard with income and expense
 async function index(req, res) {
-    // get value from filter
-    const monthFilter = req.body;
-    console.log(monthFilter);
     // get income and expense and sort by date
     const userId = req.user._id;
     const income = await Income.find({}).sort('date');
-    // get months variable for filter
+    // get months variable for filter display
     const months = [];
     // get months from income
     income.forEach((i) => {
@@ -36,6 +34,10 @@ async function index(req, res) {
             months.push(e.date.toLocaleString('default', { month: 'short' }));
         }
     });
+    // implement filter value
+    // get value from req query received from form filterMonth
+    const month = req.query.filterMonth;
+    console.log(month);
     const user = await User.findById(userId);
     res.render('app/app.ejs', {
         title: 'Dashboard',

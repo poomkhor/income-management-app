@@ -17,10 +17,6 @@ async function create(req, res) {
     req.body.userName = req.user.name;
     req.body.userEmail = req.user.name;
     req.body.userAvatar = req.user.avatar;
-    // Remove empty properties so that defaults will be applied
-    for (let key in req.body) {
-        if (req.body[key] === '') delete req.body[key];
-    }
     try {
         // Update this line because now we need the _id of the new income
         const income = await Income.create(req.body);

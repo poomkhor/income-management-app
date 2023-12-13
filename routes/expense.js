@@ -19,4 +19,7 @@ router.delete('/expense/:id', ensureLoggedIn, expenseCtrl.delete);
 // GET /category/new to add category and ensure loggedin
 router.get('/category/new', ensureLoggedIn, categoryCtrl.new);
 
+// POST /category
+router.post('/category', ensureLoggedIn, categoryCtrl.create);
+
 module.exports = router;
