@@ -10,7 +10,7 @@ module.exports = { index };
 async function index(req, res) {
     // get income and expense and sort by date
     const userId = req.user._id;
-    const income = await Income.find({}).sort('date');
+    let income = await Income.find({}).sort('date');
     // get months variable for filter display
     const months = [];
     // get months from income
@@ -23,7 +23,7 @@ async function index(req, res) {
             months.push(i.date.toLocaleString('default', { month: 'short' }));
         }
     });
-    const expense = await Expense.find({}).sort('date');
+    let expense = await Expense.find({}).sort('date');
     // get months from expense to be used in filter option
     expense.forEach((e) => {
         if (
@@ -34,10 +34,36 @@ async function index(req, res) {
             months.push(e.date.toLocaleString('default', { month: 'short' }));
         }
     });
+
     // implement filter value
     // get value from req query received from form filterMonth
     const month = req.query.filterMonth;
     console.log(month);
+
+    // get month from string got this from https://stackoverflow.com/questions/13566552/easiest-way-to-convert-month-name-to-month-number-in-js-jan-01
+
+    function getMonthFromString(month) {
+        return new Date(Date.parse(month + ' 1, 2012')).getMonth() + 1;
+    }
+    // if month exist and month is not All
+
+    if (month) {
+        if (!(month === 'All')) {
+            expense = await Expense.find({
+                $expr: {
+                    $eq: [{ $month: '$date' }, getMonthFromString(month)],
+                },
+            });
+            income = await Income.find({
+                $expr: {
+                    $eq: [{ $month: '$date' }, getMonthFromString(month)],
+                },
+            });
+        }
+    }
+
+    // console.log(expense);
+
     const user = await User.findById(userId);
     res.render('app/app.ejs', {
         title: 'Dashboard',
@@ -45,5 +71,6 @@ async function index(req, res) {
         expense,
         user,
         months,
+        month,
     });
 }

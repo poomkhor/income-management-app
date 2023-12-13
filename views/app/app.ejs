@@ -1,16 +1,5 @@
 <%- include('../partials/header') %>
 
-<script>
-    let outputMonth
-function filterMonth() {
-    const selectElement = document.querySelector('.monthFilter');
-    if (selectElement.value !== 'all') {
-        outputMonth = selectElement.value;
-    }
-    console.log(outputMonth);
-}
-</script>
-
 <!-- <script defer src="../../public/javascripts/webApp.js"></script> -->
 <h1>Income Management Dashboard</h1>
 <h2><%= user.name%></h2>
@@ -26,9 +15,11 @@ function filterMonth() {
     <button type="submit" onclick="filterMonth()">Filter</button>
     </form>
     <!-- add button to call the dom function onclick refer to js script in webApp.js-->
-
 </div>
-
+</br>
+<div>
+    Display filtered month : <%= month%>
+</div>
 
 
 </br>
