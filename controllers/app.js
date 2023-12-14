@@ -2,7 +2,6 @@
 const Income = require('../models/income');
 const { Expense } = require('../models/expense');
 const User = require('../models/user');
-const category = require('./category');
 
 module.exports = { index };
 
@@ -34,19 +33,14 @@ async function index(req, res) {
             months.push(e.date.toLocaleString('default', { month: 'short' }));
         }
     });
-
     // implement filter value
     // get value from req query received from form filterMonth
     const month = req.query.filterMonth;
-    console.log(month);
-
     // get month from string got this from https://stackoverflow.com/questions/13566552/easiest-way-to-convert-month-name-to-month-number-in-js-jan-01
-
     function getMonthFromString(month) {
         return new Date(Date.parse(month + ' 1, 2012')).getMonth() + 1;
     }
     // if month exist and month is not All
-
     if (month) {
         if (!(month === 'All')) {
             expense = await Expense.find({
@@ -61,9 +55,6 @@ async function index(req, res) {
             });
         }
     }
-
-    // console.log(expense);
-
     const user = await User.findById(userId);
     res.render('app/app.ejs', {
         title: 'Dashboard',

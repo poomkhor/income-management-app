@@ -1,6 +1,8 @@
 <%- include('../partials/header') %>
+<!-- chart.js installation through cdn-->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.js'>
+</script>
 
-<!-- <script defer src="../../public/javascripts/webApp.js"></script> -->
 <h1>Income Management Dashboard</h1>
 <h2><%= user.name%></h2>
 </br>
@@ -14,7 +16,6 @@
     </select>
     <button type="submit" onclick="filterMonth()">Filter</button>
     </form>
-    <!-- add button to call the dom function onclick refer to js script in webApp.js-->
 </div>
 </br>
 <div>
@@ -119,6 +120,59 @@
 <!-- add New Expense -->
 <button><a href='/expense/new'>ADD EXPENSE</a></button>
 </div>
+</br>
+</br>
+<canvas id="expenseChart" height="5vh" width="5vw"></canvas>
+<script>
+    let expenseObj = {}
+    let expenseDB = JSON.parse(`<%- JSON.stringify(expense) %>`);
+    expenseDB.forEach(e => {
+      if (e.category.category in expenseObj) {
+        expenseObj[e.category.category] += e.amount
+      } else {
+        expenseObj[e.category.category] = e.amount
+      }
+    })
+
+    let labelsData = Object.keys(expenseObj)
+    console.log(labelsData)
+    let expenseData = Object.values(expenseObj)
+    console.log(expenseData)
+    // force color
+    const options = {
+      plugins: {
+          colors: {
+              forceOverride: true
+          }
+      }
+    };
+    //function to display chart --> id match with id in canvas
+    let pieChart = new Chart('expenseChart', {
+      type: 'doughnut',
+      options: options,
+      data: {
+        labels: labelsData,
+        datasets : [{
+          labels: 'expense data',
+          data : expenseData,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(136, 247, 226, 0.2)',
+            'rgba(68, 212, 146,0.2)',
+            'rgba(245, 235, 103, 0.2)',
+            'rgba(255, 161, 92, 0.2)'
+
+        ],
+          hoverOffset: 4
+        }]
+      }
+    })
+</script>
 
 
 <%- include('../partials/footer') %>
