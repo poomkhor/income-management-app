@@ -18,13 +18,14 @@
     </form>
 </div>
 </br>
-<div>
+<div id="display-month">
     Display filtered month : <%= month%>
 </div>
 
 
 </br>
-<div class='income'>
+<div class="side-by-side">
+<div class='dashboard income'>
     <h2>Income Details</h2>
 <table id='income'>
     <thead>
@@ -52,7 +53,7 @@
             <td><% if (user?._id.equals(i.user)) { %>
             <!-- delete action -->
               <form action="/income/<%= i._id %>?_method=DELETE" method="POST">
-                <button type="submit">X</button>
+                <button id="Remove" type="submit">Remove</button>
               </form>
             <% } %>
           </td>
@@ -68,11 +69,11 @@
 </table>
 </br></br>
 <!-- add New Income -->
-<button><a href='/income/new'>ADD INCOME</a></button>
+<button class="add-income"><a href='/income/new'><b>ADD INCOME</b></a></button>
 </div>
 
 </br></br>
-<div class='expense'>
+<div class='dashboard expense'>
     <h2>Expense Details</h2>
 <table id='expense'>
     <thead>
@@ -102,7 +103,7 @@
             <td><% if (user?._id.equals(e.user)) { %>
             <!-- delete action -->
               <form action="/expense/<%= e._id %>?_method=DELETE" method="POST">
-                <button type="submit">X</button>
+                <button id="Remove" type="submit">Remove</button>
               </form>
             <% } %>
           </td>
@@ -118,11 +119,14 @@
 </table>
 </br></br>
 <!-- add New Expense -->
-<button><a href='/expense/new'>ADD EXPENSE</a></button>
+<button class="add-expense"><a href='/expense/new'><b>ADD EXPENSE</b></a></button>
+</div>
 </div>
 </br>
 </br>
-<canvas id="expenseChart" height="5vh" width="5vw"></canvas>
+<div class="chart-container" style="position:relative; height:20vh; width:30vw; padding: 30px">
+    <canvas id="expenseChart"></canvas>
+</div>
 <script>
     let expenseObj = {}
     let expenseDB = JSON.parse(`<%- JSON.stringify(expense) %>`);
@@ -156,17 +160,22 @@
           labels: 'expense data',
           data : expenseData,
           backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(136, 247, 226, 0.2)',
-            'rgba(68, 212, 146,0.2)',
-            'rgba(245, 235, 103, 0.2)',
-            'rgba(255, 161, 92, 0.2)'
-
+            // set the pie chart colors
+                '#14cb30',
+                '#f7ca67',
+                '#ce96ff',
+                '#1bddb0',
+                '#579ff5',
+                '#fbce75',
+                '#ff696a',
+                '#4b62e9',
+                '#ff8d13',
+                '#f83053',
+                '#16399e',
+                '#a1e50b',
+                '#26afff',
+                '#c5b5f5',
+                '#e4dd2d',
         ],
           hoverOffset: 4
         }]

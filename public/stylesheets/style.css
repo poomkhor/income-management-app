@@ -1,30 +1,59 @@
+:root {
+    --main-bg-color: #1f1d1c;
+    --main-box-color: #020001;
+    --main-text-color: #f1da02;
+    --main-title-color: #32ed87;
+    --expense-text: #d02855;
+    --income-text: #00b9de;
+    --border: #faf9f6;
+    --pie1: #14cb30;
+    --pie2: #f7ca67;
+    --pie3: #ce96ff;
+    --pie4: #1bddb0;
+    --pie5: #579ff5;
+    --pie6: #fbce75;
+    --pie7: #ff696a;
+    --pie8: #4b62e9;
+    --pie9: #ff8d13;
+    --pie10: #f83053;
+    --pie11: #16399e;
+    --pie12: #a1e50b;
+    --pie13: #26afff;
+    --pie14: #c5b5f5;
+    --pie15: #e4dd2d;
+}
+
 * {
     box-sizing: border-box;
     font-family: Helvetica;
-    color: #424748;
 }
 
 body {
     margin: 0;
-    height: 100vh;
+    /* height: 100vh; */
     display: grid;
-    grid-template-rows: 50px 1fr;
+    grid-template-rows: 70px 100vh;
     grid-template-areas:
         'nav'
         'main';
 }
 
+nav {
+    color: var(--main-title-color);
+}
+
 body > nav {
     grid-area: nav;
-    background-color: #b8c0c2;
+    color: var(--main-title-color);
+    background-color: var(--main-box-color);
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 0 20px 0 30px;
+    padding: 20px 20px 20px 30px;
 }
 
 nav > img {
-    width: 34px;
+    width: 60px;
     object-fit: contain;
     margin-right: auto;
 }
@@ -32,10 +61,10 @@ nav > img {
 body > main {
     grid-area: main;
     display: flex;
+    flex: auto;
     flex-direction: column;
     align-items: center;
-    background-color: #e8eceb;
-    padding: 20px;
+    background-color: var(--main-bg-color);
     overflow-y: scroll;
 }
 
@@ -90,7 +119,6 @@ table thead th {
 }
 
 table td {
-    padding: 10px;
     text-align: center;
 }
 
@@ -119,20 +147,6 @@ table td {
 
 #show-page div:nth-child(even) {
     font-weight: bold;
-}
-
-#add-review-form,
-#add-performer-form {
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-#add-review-form input[type='submit'],
-#add-performer-form input[type='submit'] {
-    width: 10rem;
-    grid-column: 2 / 3;
 }
 
 hr {
@@ -188,4 +202,55 @@ hr {
 .review-user img {
     border-radius: 50%;
     height: 40px;
+}
+
+h1 {
+    color: var(--main-title-color);
+}
+
+h2 {
+    color: var(--main-text-color);
+}
+
+thead {
+    color: var(--main-title-color);
+}
+
+.income tbody {
+    color: var(--income-text);
+}
+
+.expense tbody {
+    color: var(--expense-text);
+}
+
+button.add-expense {
+    background-color: var(--expense-text);
+}
+
+button.add-income {
+    background-color: var(--income-text);
+}
+
+#display-month {
+    color: var(--main-text-color);
+}
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+}
+
+.side-by-side {
+    display: flex;
+}
+
+#remove {
+    background-color: var(--pie10);
+}
+
+form {
+    color: var(--main-title-color);
+    background-color: var(--main-bg-color);
+    padding: 30px;
 }
