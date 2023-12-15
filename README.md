@@ -19,17 +19,17 @@ Technology used includes:
 -   Mongoose
 -   ChartJS
 
-<p align='center'><img src="./public/images/page.jpg" width=300 height=300></p>
+<p align='center'><img src="./public/images/page.jpg" ></p>
 
 ## :computer: Getting Started
 
-[Click here](https://income-management-app.onrender.com) to see my live project!
+[Click here](https://income-management-app.onrender.com){:target="\_blank" rel="noopener"} to see my live project!
 
 ## :pencil2: Planning & Problem Solving
 
 -   I first created wireframe for the project to get some visualization
 -   then I structure the data by creating ERD diagram to help with data relationship
--   then I create a Trello board to help keep track of the functions and features to accomplish. [Click here](https://trello.com/invite/b/w2eOcCTO/ATTIf77c9fbcf0f8fa395fa8f5ea6f6d0c2565026329/user-stories) to see my Trello board
+-   then I create a Trello board to help keep track of the functions and features to accomplish. [Click here](https://trello.com/invite/b/w2eOcCTO/ATTIf77c9fbcf0f8fa395fa8f5ea6f6d0c2565026329/user-stories){:target="\_blank" rel="noopener"} to see my Trello board
 
 ## :scream: Bugs to fix :poop:
 
