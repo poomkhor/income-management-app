@@ -5,19 +5,19 @@
 
 <h1>Income Management Dashboard</h1>
 <h2><%= user.name%></h2>
-</br>
+<!-- display outstanding balance -->
+<h2 id="balance">Outstanding Income Balance = <%=outstanding.toLocaleString("en-US",{style:"currency", currency:"THB"})%></h2>
 <!-- filter month -->
 <div>
     <form action="" method="GET">
-    <select class='filterMonth' name="filterMonth">
+    <select id="filter-dropdown" class='filterMonth' name="filterMonth">
         <option value='All'>ALL</option>
         <%- months.map(m =>
         `<option value="${m}">${m.toUpperCase()}</option>`).join('')%>
     </select>
-    <button type="submit" onclick="filterMonth()">Filter</button>
+    <button id='filterMonth' type="submit" onclick="filterMonth()">Filter</button>
     </form>
 </div>
-</br>
 <div id="display-month">
     Display filtered month : <%= month%>
 </div>
@@ -26,6 +26,8 @@
   <!-- income  -->
 <div class='dashboard income'>
     <h2>Income Details</h2>
+<!-- add New Income -->
+<button class="add-income"><a href='/income/new'><b>ADD INCOME</b></a></button>
 <table id='income'>
     <thead>
         <tr>
@@ -52,7 +54,7 @@
             <td><% if (user?._id.equals(i.user)) { %>
             <!-- delete action -->
               <form action="/income/<%= i._id %>?_method=DELETE" method="POST">
-                <button id="Remove" type="submit">Remove</button>
+                <button id="remove" type="submit"><b>Remove</b></button>
               </form>
             <% } %>
           </td>
@@ -66,11 +68,7 @@
       </tr>
     </tbody>
 </table>
-</br></br>
-<!-- add New Income -->
-<button class="add-income"><a href='/income/new'><b>ADD INCOME</b></a></button>
 </div>
-
 <!-- chart display -->
 <div class="chart-container" style="position:relative; height:20vh; width:30vw; padding: 30px">
     <h2>Expense Composition by Category</h2>
@@ -135,6 +133,8 @@
 <!-- expense -->
 <div class='dashboard expense'>
     <h2>Expense Details</h2>
+<!-- add New Expense -->
+<button class="add-expense"><a href='/expense/new'><b>ADD EXPENSE</b></a></button>
 <table id='expense'>
     <thead>
         <tr>
@@ -161,15 +161,17 @@
             <td><%=e.note%></td>
 
             <td><% if (user?._id.equals(e.user)) { %>
+            <div class="remove-edit-button">
             <!-- delete action -->
-              <form action="/expense/<%= e._id %>?_method=DELETE" method="POST">
-                <button id="Remove" type="submit">Remove</button>
+              <form id='data' action="/expense/<%= e._id %>?_method=DELETE" method="POST">
+                <button id="remove" type="submit"><b>Remove</b></button>
               </form>
             <!-- edit action -->
-              <form action="/expense/<%= e._id %>/edit">
-                <button id="Edit" type="submit">Edit</button>
+              <form id='data' action="/expense/<%= e._id %>/edit">
+                <button id="edit" type="submit"><b>Edit</b></button>
               </form>
             <% } %>
+            </div>
           </td>
         </tr>
         <%});%>
@@ -181,9 +183,6 @@
       </tr>
     </tbody>
 </table>
-</br></br>
-<!-- add New Expense -->
-<button class="add-expense"><a href='/expense/new'><b>ADD EXPENSE</b></a></button>
 </div>
 </div>
 

@@ -28,6 +28,12 @@
     font-family: Helvetica;
 }
 
+main {
+    padding-bottom: 60px;
+    background-color: var(--main-bg-color);
+    height: 200vh;
+}
+
 body {
     margin: 0;
     height: 100vh;
@@ -65,6 +71,7 @@ body > main {
     flex-direction: column;
     align-items: center;
     background-color: var(--main-bg-color);
+    height: 100vh;
     overflow-y: scroll;
 }
 
@@ -218,23 +225,46 @@ thead {
 }
 
 .income tbody {
-    color: var(--income-text);
+    color: var(--main-title-color);
 }
 
 .expense tbody {
-    color: var(--expense-text);
+    color: var(--main-title-color);
 }
 
 button.add-expense {
     background-color: var(--expense-text);
+    font-size: 20px;
+    color: var(--main-title-color);
+    border-radius: 20px;
+    padding: 8px;
+    margin: 30px;
 }
 
 button.add-income {
     background-color: var(--income-text);
+    font-size: 20px;
+    color: var(--main-title-color);
+    border-radius: 20px;
+    padding: 8px;
+    margin: 30px;
+}
+#filter-dropdown {
+    font-size: 15px;
+    height: 40px;
+    border-radius: 8px;
+}
+#filterMonth {
+    font-size: 15px;
+    color: var(--main-box-color);
+    border-radius: 8px;
+    padding: 8px;
+    margin: 30px;
 }
 
 #display-month {
     color: var(--main-text-color);
+    font-size: 20px;
 }
 
 .dashboard {
@@ -246,12 +276,29 @@ button.add-income {
     display: flex;
 }
 
-#remove {
+button#remove {
+    color: var(--border);
     background-color: var(--pie10);
+    border-radius: 5px;
+    padding: 8px;
+}
+
+button#edit {
+    background-color: var(--pie12);
+    border-radius: 5px;
+    padding: 8px;
 }
 
 form {
     color: var(--main-title-color);
     background-color: var(--main-bg-color);
     padding: 30px;
+}
+
+.remove-edit-button {
+    display: flex;
+}
+
+#balance {
+    color: var(--main-title-color);
 }

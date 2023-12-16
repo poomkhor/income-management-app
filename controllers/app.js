@@ -12,8 +12,10 @@ async function index(req, res) {
     let income = await Income.find({}).sort('date');
     // get months variable for filter display
     const months = [];
+    let outstanding = 0;
     // get months from income
     income.forEach((i) => {
+        outstanding += i.amount;
         if (
             !months.includes(
                 i.date.toLocaleString('default', { month: 'short' })
@@ -25,6 +27,7 @@ async function index(req, res) {
     let expense = await Expense.find({}).sort('date');
     // get months from expense to be used in filter option
     expense.forEach((e) => {
+        outstanding -= e.amount;
         if (
             !months.includes(
                 e.date.toLocaleString('default', { month: 'short' })
@@ -60,6 +63,7 @@ async function index(req, res) {
         title: 'Dashboard',
         income,
         expense,
+        outstanding,
         user,
         months,
         month,
