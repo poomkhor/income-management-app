@@ -34,7 +34,7 @@ Technology used includes:
 ## :scream: Bugs to fix :poop:
 
 -   :wrench: [**Not Fixed**] when scroll the page down there is 2 steps of overflow scroll
--   :wrench: [**Not Fixed**] when scroll the page down there is 2 steps of overflow scroll
+-   :wrench: [**Not Fixed**] when adding amount sometimes cursor jump to the front when adding zeros
 
 ## :sob: Lessons learnt
 
