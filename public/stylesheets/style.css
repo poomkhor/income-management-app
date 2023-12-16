@@ -302,3 +302,9 @@ form {
 #balance {
     color: var(--main-title-color);
 }
+h3 {
+    color: var(--main-title-color);
+    height: 100px;
+    width: 400px;
+    font-size: 25px;
+}
