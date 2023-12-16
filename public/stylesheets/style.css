@@ -30,7 +30,7 @@
 
 body {
     margin: 0;
-    /* height: 100vh; */
+    height: 100vh;
     display: grid;
     grid-template-rows: 70px 100vh;
     grid-template-areas:

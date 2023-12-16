@@ -1,0 +1,33 @@
+<%- include('../partials/header') %>
+
+<h2>EDIT EXPENSE</h2>
+<form id="new-form" action="/expense/<%= expense._id%>?_method=PUT" method="POST">
+  <label>Date:</label>
+  <input type="date" name="date" require value="<%=date%>">
+  <label>Detail:</label>
+  <input type="text" name="detail" require value="<%=expense.detail%>">
+  <label>Category:</label>
+  <select name="category">
+    <!-- add default selected value -->
+    <option value='<%= expense.category.category%>' selected><%= expense.category.category%></option>
+    <option value='Food'>FOOD</option>
+    <option value='Clothing'>CLOTHING</option>
+    <option value='Mortgage'>MORTGAGE</option>
+    <option value='Rental'>RENTAL</option>
+    <option value='Car Lease'>CAR LEASE</option>
+    <option value='Miscellaneous'>MISCELLANEOUS</option>
+    <%- categories.map(c =>
+        `<option value="${c.category.toUpperCase()}">${c.category.toUpperCase()}</option>`).join('')%>
+  </select>
+  <!-- add New Category -->
+    <button><a href='/category/new'>ADD NEW CATEGORY</a></button>
+</br>
+  <!-- <input type="text" name="category" required> -->
+  <label>Amount:</label>
+  <input type="number" name="amount" required value='<%= expense.amount%>'>
+  <label>Note:</label>
+  <input type="text" name="note" value='<%= expense.note%>'>
+  <input type="submit" value="Update Expense">
+</form>
+
+<%- include('../partials/footer') %>

@@ -21,10 +21,9 @@
 <div id="display-month">
     Display filtered month : <%= month%>
 </div>
-
-
-</br>
+<!-- dashboard display side-by-side -->
 <div class="side-by-side">
+  <!-- income  -->
 <div class='dashboard income'>
     <h2>Income Details</h2>
 <table id='income'>
@@ -72,58 +71,7 @@
 <button class="add-income"><a href='/income/new'><b>ADD INCOME</b></a></button>
 </div>
 
-</br></br>
-<div class='dashboard expense'>
-    <h2>Expense Details</h2>
-<table id='expense'>
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Detail</th>
-            <th>Category</th>
-            <th>Amount</th>
-            <th>Note</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% let totalExpense = 0 %>
-        <%expense.forEach((e) => {%>
-        <!-- get the total amount sum -->
-        <% totalExpense += e.amount %>
-        <tr>
-            <!-- formate Date Object -->
-            <% date= e.date.getDate().toString().padStart(2, '0') + '-' + (e.date.getMonth() + 1).toString().padStart(2, '0') + '-'+ e.date.getFullYear()%>
-            <td><%= date %></td>
-            <td><%=e.detail%></td>
-            <td><%=e.category.category%></td>
-            <!-- convert the amount to currency THB -->
-            <td><%=e.amount.toLocaleString("en-US",{style:"currency", currency:"THB"})%></td>
-            <td><%=e.note%></td>
-
-            <td><% if (user?._id.equals(e.user)) { %>
-            <!-- delete action -->
-              <form action="/expense/<%= e._id %>?_method=DELETE" method="POST">
-                <button id="Remove" type="submit">Remove</button>
-              </form>
-            <% } %>
-          </td>
-        </tr>
-        <%});%>
-        <tr>
-        <!-- Total row in THB currency -->
-        <td colspan="2"></td>
-        <td><strong>Total Expense</strong></td>
-        <td><strong><%= totalExpense.toLocaleString("en-US",{style:"currency", currency:"THB"}) %></strong></td>
-      </tr>
-    </tbody>
-</table>
-</br></br>
-<!-- add New Expense -->
-<button class="add-expense"><a href='/expense/new'><b>ADD EXPENSE</b></a></button>
-</div>
-</div>
-</br>
-</br>
+<!-- chart display -->
 <div class="chart-container" style="position:relative; height:20vh; width:30vw; padding: 30px">
     <canvas id="expenseChart"></canvas>
 </div>
@@ -182,6 +130,62 @@
       }
     })
 </script>
+
+<!-- expense -->
+<div class='dashboard expense'>
+    <h2>Expense Details</h2>
+<table id='expense'>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Detail</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Note</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% let totalExpense = 0 %>
+        <%expense.forEach((e) => {%>
+        <!-- get the total amount sum -->
+        <% totalExpense += e.amount %>
+        <tr>
+            <!-- formate Date Object -->
+            <% date= e.date.getDate().toString().padStart(2, '0') + '-' + (e.date.getMonth() + 1).toString().padStart(2, '0') + '-'+ e.date.getFullYear()%>
+            <td><%= date %></td>
+            <td><%=e.detail%></td>
+            <td><%=e.category.category%></td>
+            <!-- convert the amount to currency THB -->
+            <td><%=e.amount.toLocaleString("en-US",{style:"currency", currency:"THB"})%></td>
+            <td><%=e.note%></td>
+
+            <td><% if (user?._id.equals(e.user)) { %>
+            <!-- delete action -->
+              <form action="/expense/<%= e._id %>?_method=DELETE" method="POST">
+                <button id="Remove" type="submit">Remove</button>
+              </form>
+            <!-- edit action -->
+              <form action="/expense/<%= e._id %>/edit">
+                <button id="Edit" type="submit">Edit</button>
+              </form>
+            <% } %>
+          </td>
+        </tr>
+        <%});%>
+        <tr>
+        <!-- Total row in THB currency -->
+        <td colspan="2"></td>
+        <td><strong>Total Expense</strong></td>
+        <td><strong><%= totalExpense.toLocaleString("en-US",{style:"currency", currency:"THB"}) %></strong></td>
+      </tr>
+    </tbody>
+</table>
+</br></br>
+<!-- add New Expense -->
+<button class="add-expense"><a href='/expense/new'><b>ADD EXPENSE</b></a></button>
+</div>
+</div>
+
 
 
 <%- include('../partials/footer') %>

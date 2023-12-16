@@ -22,4 +22,10 @@ router.get('/category/new', ensureLoggedIn, categoryCtrl.new);
 // POST /category
 router.post('/category', ensureLoggedIn, categoryCtrl.create);
 
+// EDIT /expense
+router.get('/expense/:id/edit', ensureLoggedIn, expenseCtrl.edit);
+
+// UPDATE /expense
+router.put('/expense/:id', ensureLoggedIn, expenseCtrl.update);
+
 module.exports = router;
